@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+
+    THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
+    FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
+
+-->
+<rules xmlns="http://www.xebialabs.com/xl-deploy/xl-rules">
+
+    <rule name="xlrelease.CompletedTask.create" scope="deployed">
+        <conditions>
+            <type>xlrelease.CompletedTask</type>
+            <operation>CREATE</operation>
+        </conditions>
+        <steps>
+            <jython>
+                <description expression="true">"Complete the task with id " + deployed.taskId</description>
+                <order>50</order>
+                <script-path>xlrelease/completeTask.py</script-path>
+            </jython>
+        </steps>
+    </rule>
+
+
+
+</rules>
