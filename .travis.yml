@@ -1,1 +1,15 @@
 language: java
+notifications:
+  hipchat:
+    rooms:
+      secure: NrFlgVfwgqK3fGq8+VQItaxqsWv+KN01FQbyfqTUA4mcq7+qKff88nqlICDk5v8ZRILcBKEZMH2HMSfzTtN70zulIYjRn0HPeD1Na/N4Ovy2FsVy4tDgY7YEUu/nPOwemEe6weCmtacW+0w3Y6hmzr+e1632p8ZlY4tbIIZpPhU=
+deploy:
+  provider: releases
+  api_key:
+    secure: CG5cqPyRkWbtbZK2X815iYG1r5JBq400fPzPibZzgTFdhHPlHDHegj9RZrb5NrF9m+a63Dhdkbid/5BV+tQLWuNKueRM283CaODAjmuCp9KZPL1lYMRtXubzwC+T0fCdrNW+IwwlRBdhONqAO8lU2p7yRi7IXSSrXAyLYjWs1gU=
+  file: build/libs/xld-xlrelease-plugin-1.0.0.jar
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: true
+    repo: xebialabs-community/xld-xlrelease-plugin
