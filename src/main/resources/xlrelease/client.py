@@ -25,7 +25,7 @@ class XLReleaseClient(object):
         context = '/tasks/%s' % taskId
         response = request.get(context, contentType = 'application/json')
         if response.isSuccessful():
-            data = json.load(response.response)
+            data = json.loads(response.response)
             status = data["status"]
             print "Current Task with id [%s] is %s." % (taskId, status)
             return status == PENDING
@@ -39,8 +39,7 @@ class XLReleaseClient(object):
         context = '/tasks/%s' % taskId
         response = request.get(context, contentType = 'application/json')
         if response.isSuccessful():
-            print "Received response."
-            data = json.load(response.response)
+            data = json.loads(response.response)
             status = data["status"]
             print "Current Task with id [%s] is %s." % (taskId, status)
             return status == IN_PROGRESS
@@ -49,16 +48,28 @@ class XLReleaseClient(object):
             response.errorDump()
             sys.exit(1)
 
-    def completeTask(self, taskId, username = None, password = None):
+    def isTaskCompleted(self, taskId, username = None, password = None):
         request = HttpRequest(self.httpConnection, username, password)
-        context = '/api/v1/tasks/%s/complete' % taskId
-        body = '{"comment":"Completed by XL Deploy"}'
-        response = request.post(context, body, contentType = 'application/json')
+        context = '/tasks/%s' % taskId
+        response = request.get(context, contentType = 'application/json')
         if response.isSuccessful():
-            data = json.load(response.response)
+            data = json.loads(response.response)
             status = data["status"]
             print "Current Task with id [%s] is %s." % (taskId, status)
             return status == COMPLETED
+        else:
+            print "Failed to get status for task with id: %s" % taskId
+            response.errorDump()
+            sys.exit(1)
+
+    def completeTask(self, taskId, username = None, password = None):
+        request = HttpRequest(self.httpConnection, username, password)
+        context = '/tasks/%s/complete' % taskId
+        body = '{"text":"Completed by XL Deploy"}'
+        response = request.post(context, body, contentType = 'application/json')
+        if response.isSuccessful() and self.isTaskCompleted(taskId):
+            print "Current Task with id [%s] is %s." % (taskId, COMPLETED)
+            return True
         else:
             print "Failed to complete task with id: %s" % taskId
             response.errorDump()

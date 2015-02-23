@@ -13,8 +13,10 @@ password = deployed.getProperty('password')
 if taskId and xlrClient.isTaskInProgress(taskId, username, password):
     if xlrClient.completeTask(taskId,username,password):
         print "Successful completed task with id: %s" % taskId
-        sys.exit(0)
-
-print "Failed completing task"
-sys.exit(0)
+    else:
+        print "Failed completing task"
+        sys.exit(1)
+else:
+    print "Is the task in progress?"
+    sys.exit(1)
 
