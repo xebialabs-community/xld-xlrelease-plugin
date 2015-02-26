@@ -21,6 +21,7 @@
     <type type="xlrelease.CompletedTask" extends="udm.BaseDeployed" deployable-type="xlrelease.CompleteTask" container-type="xlrelease.Instance">
         <generate-deployable type="xlrelease.CompleteTask" extends="udm.BaseDeployable"/>
         <property name="taskId" required="true" description="Id of the task to be completed"/>
+        <property name="xlrTag" required="false" description="Tag that will be used by XLR to know which taskId to set."/>
         <property name="username" required="false"/>
         <property name="password" required="false" password="true"/>
     </type>
