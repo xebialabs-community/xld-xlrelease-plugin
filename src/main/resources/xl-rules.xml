@@ -12,6 +12,7 @@
         <conditions>
             <type>xlrelease.CompletedTask</type>
             <operation>CREATE</operation>
+            <operation>MODIFY</operation>
         </conditions>
         <steps>
             <jython>
