@@ -1,14 +1,3 @@
-#
-# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
-# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
-#
-
-#
-# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
-# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
-#
 import sys
 import simplejson as json
 from xlrelease.HttpConnection import HttpConnection
@@ -28,7 +17,7 @@ class XLReleaseClient(object):
 
     def isTaskPending(self, taskId, username = None, password = None):
         request = HttpRequest(self.httpConnection, username, password)
-        context = '/tasks/%s' % taskId
+        context = '/api/v1/tasks/%s' % taskId
         response = request.get(context, contentType = 'application/json')
         if response.isSuccessful():
             data = json.loads(response.response)
@@ -42,7 +31,7 @@ class XLReleaseClient(object):
 
     def isTaskInProgress(self, taskId, username = None, password = None):
         request = HttpRequest(self.httpConnection, username, password)
-        context = '/tasks/%s' % taskId
+        context = '/api/v1/tasks/%s' % taskId
         response = request.get(context, contentType = 'application/json')
         if response.isSuccessful():
             data = json.loads(response.response)
@@ -56,7 +45,7 @@ class XLReleaseClient(object):
 
     def isTaskCompleted(self, taskId, username = None, password = None):
         request = HttpRequest(self.httpConnection, username, password)
-        context = '/tasks/%s' % taskId
+        context = '/api/v1/tasks/%s' % taskId
         response = request.get(context, contentType = 'application/json')
         if response.isSuccessful():
             data = json.loads(response.response)
@@ -68,10 +57,23 @@ class XLReleaseClient(object):
             response.errorDump()
             sys.exit(1)
 
-    def completeTask(self, taskId, username = None, password = None):
+    def assign_task(self, task_id, owner, username = None, password = None):
         request = HttpRequest(self.httpConnection, username, password)
-        context = '/tasks/%s/complete' % taskId
-        body = '{"text":"Completed by XL Deploy"}'
+        context = '/api/v1/tasks/%s/assign/%s' % (task_id, owner)
+        body = ''
+        response = request.post(context,body, contentType = 'application/json')
+        if response.isSuccessful():
+            print "Assigned task with id [%s] to [%s]" % (task_id, owner)
+            return True
+        else:
+            print "Failed to assign task with id [%s] to [%s]" % (task_id, owner)
+            response.errorDump()
+            sys.exit(1)
+        
+    def complete_task(self, taskId, username = None, password = None):
+        request = HttpRequest(self.httpConnection, username, password)
+        context = '/api/v1/tasks/%s/complete' % taskId
+        body = '{"comment":"Completed by XL Deploy"}'
         response = request.post(context, body, contentType = 'application/json')
         if response.isSuccessful() and self.isTaskCompleted(taskId):
             print "Current Task with id [%s] is %s." % (taskId, COMPLETED)

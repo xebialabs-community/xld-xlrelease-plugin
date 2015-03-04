@@ -1,24 +1,20 @@
-#
-# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
-# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
-#
-
-#
-# THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS
-# FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
-#
 import sys
-from xlrelease.util import XLReleaseClientUtil
+from xlrelease.XLReleaseClientUtil import XLReleaseClientUtil
 
 xlrClient = XLReleaseClientUtil.createXLReleaseClient(deployed.container)
 taskId = deployed.getProperty('taskId')
 username = deployed.getProperty('username')
 password = deployed.getProperty('password')
+owner = username if username else deployed.container.getProperty('username')
 if taskId and xlrClient.isTaskInProgress(taskId, username, password):
-    if xlrClient.completeTask(taskId,username,password):
-        print "Successful completed task with id: %s" % taskId
+    if xlrClient.assign_task(taskId,owner,username,password):
+        print "Assigned task with id [%s] to owner [%s]" % (taskId, owner)
+    else:
+        print "Failed assigning task with id [%s] to owner [%s]" % (taskId, owner)
+        sys.exit(1)
+        
+    if xlrClient.complete_task(taskId,username,password):
+        print "Successful completed task with id: [%s]" % taskId
     else:
         print "Failed completing task"
         sys.exit(1)

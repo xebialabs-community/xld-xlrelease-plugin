@@ -7,7 +7,7 @@ deploy:
   provider: releases
   api_key:
     secure: CG5cqPyRkWbtbZK2X815iYG1r5JBq400fPzPibZzgTFdhHPlHDHegj9RZrb5NrF9m+a63Dhdkbid/5BV+tQLWuNKueRM283CaODAjmuCp9KZPL1lYMRtXubzwC+T0fCdrNW+IwwlRBdhONqAO8lU2p7yRi7IXSSrXAyLYjWs1gU=
-  file: build/libs/xld-xlrelease-plugin-1.0.1.jar
+  file: build/libs/xld-xlrelease-plugin-1.0.2.jar
   skip_cleanup: true
   on:
     all_branches: true

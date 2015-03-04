@@ -4,7 +4,7 @@
 # FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
 #
 
-from xlrelease.client import XLReleaseClient
+from xlrelease.XLReleaseClient import XLReleaseClient
 
 
 class XLReleaseClientUtil(object):

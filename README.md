@@ -12,6 +12,9 @@ The XLD XL Release plugin is an XL Deploy plugin that adds capability to complet
 
 * **Requirements**
 	* **XL Deploy** 4.5.0
+	* **Additional Runtime Libraries**
+    		* httpclient-4.3.5.jar (should be under lib, replacing httpclient-4.2.1.jar)
+    		* httpcore-4.3.2.jar (should be under lib, replacing httpcore-4.2.1.jar)
 
 # Installation #
 
