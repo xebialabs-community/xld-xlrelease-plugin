@@ -6,7 +6,7 @@ notifications:
 deploy:
   provider: releases
   api_key:
-    secure: CG5cqPyRkWbtbZK2X815iYG1r5JBq400fPzPibZzgTFdhHPlHDHegj9RZrb5NrF9m+a63Dhdkbid/5BV+tQLWuNKueRM283CaODAjmuCp9KZPL1lYMRtXubzwC+T0fCdrNW+IwwlRBdhONqAO8lU2p7yRi7IXSSrXAyLYjWs1gU=
+    secure: M5I777Wo8K1IcqPaBsI+aULSz6PSYg1bywErgZeFr+cWwProVEzevke8hLR4mJWj6xmK8yD8AitgyIL6Gji8/Efb8i7tTOiDAVuOCVo625kzuBf0LiZbU4w1LVOEsDbK2bZs7esx/9FyeqlpL7w6bdHUJhWIi+zU/5WhSxwwfIE=
   file: build/libs/xld-xlrelease-plugin-1.0.2.jar
   skip_cleanup: true
   on:
