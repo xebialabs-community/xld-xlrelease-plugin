@@ -1,8 +1,7 @@
 language: java
 notifications:
-  hipchat:
-    rooms:
-      secure: NrFlgVfwgqK3fGq8+VQItaxqsWv+KN01FQbyfqTUA4mcq7+qKff88nqlICDk5v8ZRILcBKEZMH2HMSfzTtN70zulIYjRn0HPeD1Na/N4Ovy2FsVy4tDgY7YEUu/nPOwemEe6weCmtacW+0w3Y6hmzr+e1632p8ZlY4tbIIZpPhU=
+  slack:
+    secure: LstdytJKNXwGH8F+6Nv6XweUs5Obhn9NMeTJ3n6NmrLuZG/qzOCgwMzeHKlSPj1xsudHVn4kVxuYluvuGKcnE3KfpJy8Tz/EkQ9bLNsnvUZl0zHJxMshG7j/BJMCe++7zG8YzbTVfT9Ene5TOcACu/vM+Y36k9rhCwQAqCoirgE=
 deploy:
   provider: releases
   api_key:
